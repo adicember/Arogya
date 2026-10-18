@@ -1,110 +1,124 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import logo from '../../assets/arogya_logo.jpeg';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+
+const links = [
+  { to: '/', label: 'Home', end: true },
+  { to: '/SurveyForm', label: 'Survey' },
+  { to: '/UltrasoundImage', label: 'Ultrasound' },
+  { to: '/find-care', label: 'Find a doctor' },
+];
+
+const linkClass = ({ isActive }) =>
+  `inline-flex min-h-[44px] items-center border-b-2 transition-colors ${
+    isActive
+      ? 'border-rose-700 font-semibold text-rose-700'
+      : 'border-transparent font-medium text-ink-700 hover:text-rose-700'
+  }`;
+
+const outlineBtn =
+  'inline-flex min-h-[44px] items-center justify-center rounded-md border-[1.5px] border-rose-700 bg-white px-5 py-3 font-semibold leading-tight text-rose-700 transition-colors hover:bg-rose-50';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Check if user is logged in
   const isLoggedIn = localStorage.getItem('user_id') && localStorage.getItem('token');
 
-  // Logout function to clear user data and redirect to login page
   const handleLogout = () => {
     localStorage.removeItem('user_id');
     localStorage.removeItem('token');
-    navigate('/login'); // Redirect to the login page after logout
+    setIsOpen(false);
+    navigate('/login');
   };
 
+  const authButton = isLoggedIn ? (
+    <button onClick={handleLogout} className={outlineBtn}>
+      Log out
+    </button>
+  ) : (
+    <Link to="/login" onClick={() => setIsOpen(false)} className={outlineBtn}>
+      Log in
+    </Link>
+  );
+
   return (
-    <nav className="flex items-center justify-between py-1 px-5 bg-white shadow-lg relative">
-      {/* Logo */}
-      <div>
-        <img src={logo} alt="logo" className="w-18 h-14 object-contain" />
-      </div>
+    <nav className="relative z-50 flex h-16 items-center gap-6 border-b border-ink-200 bg-paper px-4 font-sans text-ink-900 sm:px-6 lg:px-8">
+      <Link to="/" className="font-display text-2xl font-semibold leading-none text-rose-700">
+        Arogya
+      </Link>
 
-      {/* Desktop Navigation Links */}
-      <div className="hidden md:flex space-x-8 text-gray-700 text-md">
-        <Link to="/" className="hover:text-[#DE7C7D] transition">Home</Link>
-        <Link to="/AboutPCOS" className="hover:text-[#DE7C7D] transition">About PCOS</Link>
-        <Link to="/SurveyForm" className="hover:text-[#DE7C7D] transition">Survey Form</Link>
-        <Link to="/UltrasoundImage" className="hover:text-[#DE7C7D] transition">Ultrasound</Link>
-      </div>
+      {/* Desktop links */}
+      <ul className="hidden items-center gap-6 md:flex">
+        {links.map((l) => (
+          <li key={l.to}>
+            <NavLink to={l.to} end={l.end} className={linkClass}>
+              {l.label}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
 
-      {/* Mobile Menu Button */}
-      <div className="md:hidden flex items-center">
-        <button onClick={() => setIsOpen(!isOpen)} className="text-gray-700 focus:outline-none">
-          {/* Hamburger icon */}
+      <div className="ml-auto flex items-center gap-2">
+        <div className="hidden md:block">{authButton}</div>
+
+        {/* Mobile menu button */}
+        <button
+          type="button"
+          aria-label="Menu"
+          aria-expanded={isOpen}
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex h-11 w-11 items-center justify-center rounded-md md:hidden"
+        >
           <svg
-            className="w-6 h-6"
+            viewBox="0 0 24 24"
+            className="h-5 w-5"
             fill="none"
             stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            {isOpen ? (
+              <>
+                <line x1="5" y1="5" x2="19" y2="19" />
+                <line x1="19" y1="5" x2="5" y2="19" />
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </>
+            )}
           </svg>
         </button>
       </div>
 
-      {/* Login or Logout Button (visible on large screens) */}
-      <div className="hidden md:block">
-        {isLoggedIn ? (
-          <button
-            onClick={handleLogout}
-            className="px-5 py-2 bg-pcosPink text-white font-medium rounded-full shadow-md hover:bg-gray-100 transition"
-            style={{ backgroundColor: "#862949" }}
-          >
-            Log Out
-          </button>
-        ) : (
-          <Link to="/login">
-            <button
-              className="px-5 py-2 bg-pcosPink text-white font-medium rounded-full shadow-md hover:bg-gray-100 transition"
-              style={{ backgroundColor: "#862949" }}
-            >
-              Log In
-            </button>
-          </Link>
-        )}
-      </div>
-
-      {/* Mobile Menu with Overlay */}
+      {/* Mobile sheet */}
       {isOpen && (
-        <>
-          {/* Overlay to close the menu when clicking outside */}
-          <div
-            className="fixed inset-0 bg-black opacity-50 z-40"
-            onClick={() => setIsOpen(false)}
-          ></div>
-
-          {/* Mobile Menu */}
-          <div className="md:hidden absolute top-16 left-0 w-full bg-white shadow-lg z-50">
-            <div className="flex flex-col items-center space-y-4 py-4 text-gray-700 text-md">
-              <Link to="/" className="hover:text-[#DE7C7D] transition" onClick={() => setIsOpen(false)}>Home</Link>
-              <Link to="/AboutPCOS" className="hover:text-[#DE7C7D] transition" onClick={() => setIsOpen(false)}>About PCOS</Link>
-              <Link to="/SurveyForm" className="hover:text-[#DE7C7D] transition" onClick={() => setIsOpen(false)}>Survey Form</Link>
-              <Link to="/UltrasoundImage" className="hover:text-[#DE7C7D] transition" onClick={() => setIsOpen(false)}>Ultrasound</Link>
-              {isLoggedIn ? (
-                <button
-                  onClick={handleLogout}
-                  className="px-5 py-2 bg-[#A72831] text-gray-700 font-medium rounded-full shadow-md hover:bg-gray-100 transition"
+        <div className="absolute left-0 top-full w-full border-b border-ink-200 bg-paper px-4 pb-4 pt-2 shadow-[0_12px_40px_rgba(74,22,40,.16)] md:hidden">
+          <ul className="flex flex-col">
+            {links.map((l) => (
+              <li key={l.to}>
+                <NavLink
+                  to={l.to}
+                  end={l.end}
+                  onClick={() => setIsOpen(false)}
+                  className={({ isActive }) =>
+                    `flex min-h-[48px] items-center rounded-md px-3 ${
+                      isActive
+                        ? 'bg-rose-50 font-semibold text-rose-700'
+                        : 'font-medium text-ink-700'
+                    }`
+                  }
                 >
-                  Log Out
-                </button>
-              ) : (
-                <Link to="/login">
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="px-5 py-2 bg-[#A72831] text-gray-700 font-medium rounded-full shadow-md hover:bg-gray-100 transition"
-                  >
-                    Log In
-                  </button>
-                </Link>
-              )}
-            </div>
-          </div>
-        </>
+                  {l.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-3 flex [&>*]:w-full">{authButton}</div>
+        </div>
       )}
     </nav>
   );

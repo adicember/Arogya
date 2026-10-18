@@ -17,10 +17,6 @@ import Footer from "./pages/Footer";
 import UltrasoundImage from "./pages/UltrasoundImage";
 
 const App = () => {
-  // Check if user is logged in by verifying if user_id exists in localStorage
-  const isLoggedIn = localStorage.getItem("user_id");
-  console.log(isLoggedIn);
-
   return (
     <div>
       <Navbar />
@@ -39,19 +35,10 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
 
-        {/* Protected Routes */}
-        <Route
-          path="/SurveyForm"
-          element={isLoggedIn ? <SurveyForm /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/AboutPCOS"
-          element={isLoggedIn ? <AboutPCOS /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/UltrasoundImage"
-          element={isLoggedIn ? <UltrasoundImage /> : <Navigate to="/login" />}
-        />
+        {/* Login check removed for now: these routes are open to everyone */}
+        <Route path="/SurveyForm" element={<SurveyForm />} />
+        <Route path="/AboutPCOS" element={<AboutPCOS />} />
+        <Route path="/UltrasoundImage" element={<UltrasoundImage />} />
 
         {/* Catch-all Route */}
         <Route path="*" element={<Navigate to="/" />} />
