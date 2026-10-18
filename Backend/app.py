@@ -9,6 +9,8 @@ from tensorflow.keras.models import load_model
 from PIL import Image
 import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 app = Flask(__name__)
 CORS(app)
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -110,10 +112,10 @@ def login():
             cursor.close()
             connection.close()
 
-model = tf.keras.models.load_model('/Users/aditikasingh/Arogya/Backend/pcos_model_downloadable.h5')
+model = tf.keras.models.load_model(os.path.join(BASE_DIR, 'pcos_model_downloadable.h5'))
 
 # Add this after loading the PCOS model
-usg_classifier = tf.keras.models.load_model('/Users/aditikasingh/Arogya/Backend/usg_classifier.h5')
+usg_classifier = tf.keras.models.load_model(os.path.join(BASE_DIR, 'usg_classifier.h5'))
 
 @app.route('/predict', methods=['POST'])
 # ultrasound classifier and PCOS model are loaded as `usg_classifier` and `model`

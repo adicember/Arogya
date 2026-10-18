@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 
 def convert_height(height):
@@ -116,7 +117,7 @@ positive_test = {
 from joblib import dump, load
 
 # Save the trained model
-model_filename = "/Users/aditikasingh/Codes/Final Year Project/Arogya/pcos/id3/optimized_decision_tree_model.joblib"
+model_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), "optimized_decision_tree_model.joblib")
 
 loaded_model = load(model_filename)
 print("Model loaded successfully.")
