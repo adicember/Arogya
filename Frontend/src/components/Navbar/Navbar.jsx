@@ -42,7 +42,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="relative z-50 flex h-16 items-center gap-6 border-b border-ink-200 bg-paper px-4 font-sans text-ink-900 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 flex h-16 items-center gap-6 border-b border-ink-200 bg-paper px-4 font-sans text-ink-900 sm:px-6 lg:px-8">
       <Link to="/" className="font-display text-2xl font-semibold leading-none text-rose-700">
         Arogya
       </Link>

@@ -12,9 +12,9 @@ import Banner from "./pages/Banner";
 import Question from "./pages/Question";
 import SurveyForm from "./components/SurveyForm/SurveyForm";
 import AboutPCOS from "./components/AboutPCOS/AboutPCOS";
-import Footer from "./pages/Footer";
 import UltrasoundImage from "./pages/UltrasoundImage";
 import Home from "./components/HomePage/Home/Home";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   return (

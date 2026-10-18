@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const iconProps = {
@@ -43,7 +42,7 @@ const signs = [
     ),
   },
   {
-    label: "Pimples that won't settle",
+    label: "Pimples that won’t settle",
     tone: "amber",
     icon: (
       <>
@@ -116,7 +115,7 @@ function About() {
               Polycystic ovary syndrome (PCOS) is a common hormonal condition. It
               can affect your periods, skin, hair and weight, and sometimes
               fertility. Many women live with it for years without knowing, and
-              it's very manageable once you do.
+              it&apos;s very manageable once you do.
             </p>
           </div>
           <Link
@@ -155,8 +154,8 @@ function About() {
               <line x1="12" y1="8" x2="12.01" y2="8" />
             </svg>
             <span>
-              One sign on its own doesn't mean PCOS. If you notice several
-              together, it's worth a gentle check.
+              One sign on its own doesn&apos;t mean PCOS. If you notice several
+              together, it&apos;s worth a gentle check.
             </span>
           </div>
         </div>
