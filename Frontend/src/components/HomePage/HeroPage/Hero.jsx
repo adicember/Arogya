@@ -6,7 +6,10 @@ const Hero = () => {
   return (
     <header
       className="relative overflow-hidden bg-gradient-to-br from-rose-50 via-rose-100 to-sage-50"
-      style={{ padding: "clamp(32px, 5vw, 72px) clamp(16px, 4vw, 32px) clamp(72px, 9vw, 120px)" }}
+      style={{
+        padding:
+          "clamp(32px, 5vw, 72px) clamp(16px, 4vw, 32px) clamp(72px, 9vw, 120px)",
+      }}
     >
       <div className="mx-auto flex max-w-[1100px] flex-wrap items-center gap-10">
         <div className="flex min-w-0 basis-[480px] flex-[999_1_480px] flex-col items-start gap-[18px]">
@@ -71,7 +74,14 @@ const Hero = () => {
                 d="M126 150 C120 86 166 64 190 72 C228 78 246 114 244 152 C244 196 256 236 238 268 L134 268 C116 236 128 196 126 150 Z"
                 fill="#4A1628"
               />
-              <rect x="166" y="196" width="28" height="36" rx="10" fill="#B9785A" />
+              <rect
+                x="166"
+                y="196"
+                width="28"
+                height="36"
+                rx="10"
+                fill="#B9785A"
+              />
               <path
                 d="M92 360 C92 272 132 232 180 232 C228 232 268 272 268 360 Z"
                 fill="#3F8F82"
@@ -81,9 +91,27 @@ const Hero = () => {
                 d="M132 148 C136 104 168 90 192 95 C216 100 230 120 228 142 C210 134 190 124 172 110 C166 130 150 144 132 148 Z"
                 fill="#4A1628"
               />
-              <path d="M156 160 q7 6 14 0" fill="none" stroke="#2A1F24" strokeWidth="3" strokeLinecap="round" />
-              <path d="M190 160 q7 6 14 0" fill="none" stroke="#2A1F24" strokeWidth="3" strokeLinecap="round" />
-              <path d="M170 178 q10 8 20 0" fill="none" stroke="#4A1628" strokeWidth="3" strokeLinecap="round" />
+              <path
+                d="M156 160 q7 6 14 0"
+                fill="none"
+                stroke="#2A1F24"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+              <path
+                d="M190 160 q7 6 14 0"
+                fill="none"
+                stroke="#2A1F24"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+              <path
+                d="M170 178 q10 8 20 0"
+                fill="none"
+                stroke="#4A1628"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
               <circle cx="152" cy="174" r="7" fill="#D97C8C" opacity="0.55" />
               <circle cx="208" cy="174" r="7" fill="#D97C8C" opacity="0.55" />
             </g>
@@ -92,9 +120,26 @@ const Hero = () => {
               d="M276 76 C276 66 288 62 292 71 C296 62 308 66 308 76 C308 87 292 96 292 96 C292 96 276 87 276 76 Z"
               fill="#862949"
             />
-            <path d="M50 90 l5 13 l13 5 l-13 5 l-5 13 l-5 -13 l-13 -5 l13 -5 Z" fill="#E8C77A" />
-            <ellipse cx="54" cy="270" rx="26" ry="11" transform="rotate(-40 54 270)" fill="#3F8F82" />
-            <ellipse cx="70" cy="236" rx="20" ry="9" transform="rotate(-70 70 236)" fill="#8CC3B8" />
+            <path
+              d="M50 90 l5 13 l13 5 l-13 5 l-5 13 l-5 -13 l-13 -5 l13 -5 Z"
+              fill="#E8C77A"
+            />
+            <ellipse
+              cx="54"
+              cy="270"
+              rx="26"
+              ry="11"
+              transform="rotate(-40 54 270)"
+              fill="#3F8F82"
+            />
+            <ellipse
+              cx="70"
+              cy="236"
+              rx="20"
+              ry="9"
+              transform="rotate(-70 70 236)"
+              fill="#8CC3B8"
+            />
           </svg>
         </div>
       </div>

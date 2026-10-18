@@ -8,13 +8,13 @@ import {
 import Navbar from "./components/Navbar/Navbar";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Hero from "./pages/Hero";
 import Banner from "./pages/Banner";
 import Question from "./pages/Question";
 import SurveyForm from "./components/SurveyForm/SurveyForm";
 import AboutPCOS from "./components/AboutPCOS/AboutPCOS";
 import Footer from "./pages/Footer";
 import UltrasoundImage from "./pages/UltrasoundImage";
+import Home from "./components/HomePage/Home/Home";
 
 const App = () => {
   return (
@@ -22,13 +22,21 @@ const App = () => {
       <Navbar />
       <Routes>
         {/* Public Routes */}
-        <Route
+        {/* <Route
           path="/"
           element={
             <>
               <Hero />
               <Banner />
               <Question />
+            </>
+          }
+        /> */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Home />
             </>
           }
         />
