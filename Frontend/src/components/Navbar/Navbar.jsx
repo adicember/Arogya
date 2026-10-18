@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 const links = [
@@ -20,21 +20,79 @@ const outlineBtn =
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const isLoggedIn = localStorage.getItem('user_id') && localStorage.getItem('token');
 
+  const closeAll = () => {
+    setIsOpen(false);
+    setMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const onClick = (e) => {
+      if (!e.target.closest('[data-account-menu]')) setMenuOpen(false);
+    };
+    document.addEventListener('mousedown', onClick);
+    return () => document.removeEventListener('mousedown', onClick);
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('user_id');
     localStorage.removeItem('token');
-    setIsOpen(false);
+    localStorage.removeItem('user_email');
+    closeAll();
     navigate('/login');
   };
 
   const authButton = isLoggedIn ? (
-    <button onClick={handleLogout} className={outlineBtn}>
-      Log out
-    </button>
+    <div className="relative" data-account-menu>
+      <button
+        type="button"
+        aria-label="Account menu"
+        aria-haspopup="menu"
+        aria-expanded={menuOpen}
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="flex h-11 w-11 items-center justify-center rounded-full border-[1.5px] border-rose-700 bg-rose-50 text-rose-700 transition-colors hover:bg-rose-100"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          className="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+      </button>
+      {menuOpen && (
+        <div
+          role="menu"
+          className="absolute right-0 top-full z-50 mt-2 w-48 overflow-hidden rounded-xl border border-ink-200 bg-white py-1 shadow-[0_12px_40px_rgba(74,22,40,.16)] max-md:static max-md:mt-2 max-md:w-full"
+        >
+          <Link
+            role="menuitem"
+            to="/profile"
+            onClick={closeAll}
+            className="flex min-h-[44px] items-center px-4 font-medium text-ink-900 hover:bg-rose-50"
+          >
+            Profile
+          </Link>
+          <button
+            role="menuitem"
+            type="button"
+            onClick={handleLogout}
+            className="flex min-h-[44px] w-full items-center px-4 text-left font-medium text-rose-700 hover:bg-rose-50"
+          >
+            Log out
+          </button>
+        </div>
+      )}
+    </div>
   ) : (
     <Link to="/login" onClick={() => setIsOpen(false)} className={outlineBtn}>
       Log in

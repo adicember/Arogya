@@ -6,15 +6,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import Banner from "./pages/Banner";
-import Question from "./pages/Question";
+import MyReports from "./components/Profile/MyReports";
 import SurveyForm from "./components/SurveyForm/SurveyForm";
 import AboutPCOS from "./components/AboutPCOS/AboutPCOS";
-import UltrasoundImage from "./pages/UltrasoundImage";
+
 import Home from "./components/HomePage/Home/Home";
 import Footer from "./components/Footer/Footer";
+import UltrasoundImage from "./components/Ultrasound/UltrasoundImage";
+import Login from "./components/Login/Login";
 
 const App = () => {
   return (
@@ -40,8 +39,9 @@ const App = () => {
             </>
           }
         />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<Login initialMode="signup" />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<MyReports />} />
 
         {/* Login check removed for now: these routes are open to everyone */}
         <Route path="/SurveyForm" element={<SurveyForm />} />
